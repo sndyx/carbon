@@ -1,0 +1,9 @@
+name: "Carbon"
+version: 1.0
+author: "sndy"
+main: "moe.sndy.carbon.Carbon"
+website: "https://sndy.moe"
+commands:
+  items:
+    description: "items command"
+    usage: "/items ?[ reload | table <name> ]"

@@ -14,7 +14,7 @@ import java.util.UUID;
 public class ProfileAdapter extends Adapter {
 
     public ProfileAdapter(UUID uuid, int id) {
-        File profile = new File("Carbon/data/players/" + uuid.toString() + "/profile-" + id + ".dat");
+        File profile = new File("carbon/data/players/" + uuid.toString() + "/Profile-" + id + ".dat");
         if (profile.exists()) {
             try {
                 FileInputStream fileStream = new FileInputStream(profile);
@@ -24,10 +24,10 @@ public class ProfileAdapter extends Adapter {
                 objectStream.close();
                 adapt();
             } catch (Exception e) {
-                Carbon.logger().warning("failed to load profile data from UUID '" + uuid + "'");
+                Carbon.logger().warning("failed to load profile-" + id + " from UUID '" + uuid + "'");
                 Yaml yaml = new Yaml();
                 try {
-                    attributes = yaml.load(new FileInputStream(new File("Carbon/resources/Attributes.yml")));
+                    attributes = yaml.load(new FileInputStream(new File("carbon/resources/Attributes.yml")));
                 } catch (IOException e1) {
                     Carbon.logger().warning("failed to load file 'Attributes.yaml'");
                 }
@@ -35,7 +35,7 @@ public class ProfileAdapter extends Adapter {
         } else {
             Yaml yaml = new Yaml();
             try {
-                attributes = yaml.load(new FileInputStream(new File("Carbon/resources/Attributes.yml")));
+                attributes = yaml.load(new FileInputStream(new File("carbon/resources/Attributes.yml")));
             } catch (IOException e) {
                 Carbon.logger().warning("failed to load file 'Attributes.yaml'");
             }

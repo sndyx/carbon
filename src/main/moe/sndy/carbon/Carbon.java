@@ -1,6 +1,8 @@
 package moe.sndy.carbon;
 
+import moe.sndy.carbon.commands.CommandHandler;
 import moe.sndy.carbon.data.DataManager;
+import moe.sndy.carbon.listeners.ListenerHandler;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
@@ -9,12 +11,17 @@ public final class Carbon extends JavaPlugin {
 
     private static Carbon plugin;
     private DataManager dataManager;
+    private ListenerHandler listenerHandler;
+    private CommandHandler commandHandler;
 
     @Override
     public void onEnable() {
         plugin = this;
         dataManager = new DataManager();
-        // TODO: Enable modules
+        listenerHandler = new ListenerHandler();
+        listenerHandler.registerListeners();
+        commandHandler = new CommandHandler();
+        commandHandler.registerCommands();
     }
 
     @Override
@@ -28,6 +35,10 @@ public final class Carbon extends JavaPlugin {
 
     public static Carbon getPlugin() {
         return plugin;
+    }
+
+    public DataManager getDataManager() {
+        return dataManager;
     }
 
 }

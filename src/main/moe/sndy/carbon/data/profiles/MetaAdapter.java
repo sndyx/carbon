@@ -14,7 +14,7 @@ import java.util.UUID;
 public class MetaAdapter extends Adapter {
 
     public MetaAdapter(UUID uuid) {
-        File profile = new File("Carbon/data/player/" + uuid.toString() + "/global.dat");
+        File profile = new File("carbon/data/player/" + uuid.toString() + "/Global.dat");
         if (profile.exists()) {
             try {
                 FileInputStream fileStream = new FileInputStream(profile);
@@ -27,7 +27,7 @@ public class MetaAdapter extends Adapter {
                 Carbon.logger().warning("failed to load global profile data from UUID '" + uuid + "'");
                 Yaml yaml = new Yaml();
                 try {
-                    attributes = yaml.load(new FileInputStream(new File("Carbon/resources/GlobalAttributes.yml")));
+                    attributes = yaml.load(new FileInputStream(new File("carbon/resources/GlobalAttributes.yml")));
                 } catch (IOException e1) {
                     Carbon.logger().warning("failed to load file 'GlobalAttributes.yaml'");
                 }
@@ -35,11 +35,11 @@ public class MetaAdapter extends Adapter {
         } else {
             Yaml yaml = new Yaml();
             try {
-                attributes = yaml.load(new FileInputStream(new File("Carbon/resources/GlobalAttributes.yml")));
+                attributes = yaml.load(new FileInputStream(new File("carbon/resources/GlobalAttributes.yml")));
             } catch (IOException e) {
                 Carbon.logger().warning("failed to load file 'GlobalAttributes.yaml'");
             }
-            setAttribute(new Date(), "extra", "join-date");
+            setAttribute(new Date().getTime(), "join-date");
         }
     }
 

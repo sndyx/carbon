@@ -56,7 +56,7 @@ public class Profile {
         adapter.setAttribute(player.getLocation().getY(), "player", "location", "y");
         adapter.setAttribute(player.getLocation().getZ(), "player", "location", "z");
         try {
-            FileOutputStream fileStream = new FileOutputStream("Carbon/data/players/" + uuid + "/profile-" + id + ".dat");
+            FileOutputStream fileStream = new FileOutputStream("carbon/data/players/" + uuid + "/Profile-" + id + ".dat");
             ObjectOutputStream outputStream = new ObjectOutputStream(fileStream);
             outputStream.writeObject(adapter);
             outputStream.close();
@@ -111,11 +111,7 @@ public class Profile {
             int z = (Integer) adapter.getAttribute("player", "location", "z");
             player.teleport(new Location(world, x, y, z));
             player.getInventory().setContents(deserializeInventory((String) adapter.getAttribute("player", "inventory")));
-        } catch (NullPointerException e) {
-            Carbon.logger().warning("failed to sync '" + uuid.toString() + "' with profile '" + id + "'");
-        } catch (IOException e) {
-            Carbon.logger().warning("failed to sync '" + uuid.toString() + "' with profile '" + id + "'");
-        } catch (ClassNotFoundException e) {
+        } catch (NullPointerException | IOException | ClassNotFoundException e) {
             Carbon.logger().warning("failed to sync '" + uuid.toString() + "' with profile '" + id + "'");
         }
     }
